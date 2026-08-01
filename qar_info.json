@@ -1,0 +1,7 @@
+{
+	"common_dir" : "/home/jordan/quartus-projects/LEDFSMProject/",
+	"acds_version" : "Version 20.1.0",
+	"platform" : "linux",
+	"os" : "Ubuntu 26.04",
+	"qpf" : "LED_FSM_PROJECT.qpf"
+}

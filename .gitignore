@@ -1,0 +1,47 @@
+# ---- Quartus / Platform Designer build output (never commit) ----
+
+
+db/
+incremental_db/
+.qsys_edit/
+greybox_tmp/
+soc_system/
+!soc_system.qsys
+*.rpt
+*.summary
+*.smsg
+*.qmsg
+*.jdi
+*.pin
+*.sld
+*.done
+*.smp_dump.txt
+*.map.txt
+c5_pin_model_dump.txt
+hps_sdram_p0_summary.csv
+*.sof
+*.pof
+*.rbf
+*.jic
+*.rpd
+hps_isw_handoff/
+simulation/
+*.wlf
+transcript
+*.qws
+*.ptf.*
+*.done
+assignment_defaults.qdf
+
+# OS junk
+.DS_Store
+__MACOSX/
+
+# ---- What IS committed (for reference — do not add to ignore) ----
+#   *.v                 RTL: fnv1a_core.v, fnv1a_slave.v, tle.v
+#   fnv1a_slave_hw.tcl  custom Platform Designer component definition
+#   soc_system.qsys     Qsys system description (source of truth)
+#   *.qpf               Quartus project file
+#   *.qsf               Quartus settings (pin/constraint assignments)
+#   *.sdc               timing constraints (if present as source)
+#   README.md
