@@ -89,18 +89,6 @@ scp fpga_program.rbf root@DE10_IP:/lib/firmware/     # copy the .rbf (not the .s
 **2. Mount configfs and apply the bridge overlay** (`brg.dts`), which enables the
 HPS-to-FPGA bridge:
 
-```dts
-/dts-v1/;
-/plugin/;
-/ {
-    fragment@0 {
-        target = <&fpga_bridge0>;
-        __overlay__ {
-            status = "okay";
-        };
-    };
-};
-```
 
 ```sh
 mount -t configfs none /sys/kernel/config 2>/dev/null
