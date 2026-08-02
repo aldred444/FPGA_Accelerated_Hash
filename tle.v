@@ -73,7 +73,6 @@ module tle
     inout         hps_io_hps_io_gpio_inst_GPIO61
 );
 
-    // ---- The FPGA logic: the whole point of the project ----
     wire [7:0] operand1;
     wire [7:0] operand2;
     wire [8:0] sum = operand1 + operand2;   // 9 bits: 255+255=510 needs bit 8
