@@ -125,7 +125,7 @@ CONTROL bit0, then poll STATUS for `done`/`found` and read RESULT.
 - `soc_system.qsys` — Qsys system.
 - `sim/` — `fnv1a_tb.v`, `run.do`, `wave.do` (self-checking testbench).
 - `*.qpf`, `*.qsf` — Quartus project/settings.
-- `fnv1a_hps.c` - C file ran on HPS to validate expected results of both software implementations (with and without FPGA accerleration).
+- `fnv1a_hps.c` - C file ran on HPS to validate expected results of both hardware & software implementations (with and without FPGA accerleration).
 
 ## Next steps
 
