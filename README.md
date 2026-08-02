@@ -52,28 +52,9 @@ the lightweight HPS-to-FPGA bridge via a memory-mapped register interface.
 
 ## Verification
 
-The RTL is checked against a software golden model in `sim/`:
+The design is validated end-to-end against a C software reference (fnv1a_hps.c): the reference computes the FNV-1a hash and brute-forces the same 4-character keyspace in software, arriving at the same preimage the hardware finds ("test", index 346,235). This confirms the FPGA and an independent software implementation agree on the result.
 
-- `fnv1a_tb.v` — self-checking testbench. It contains `fnv1a_ref()`, a Verilog
-  reimplementation of the exact FNV-1a algorithm (matching the C reference), and
-  verifies the core three ways:
-  - a **continuous** per-candidate check — every cycle the core is running, its
-    internal hash for the current index must equal the reference (bit-exact);
-  - directed vectors — a low index, the `"test"` vector at index 346,235, the
-    `MAX-1` boundary, and a not-found sweep;
-  - 16 randomized golden vectors, checking the returned preimage actually hashes
-    to the target with no overshoot.
-- `run.do` — headless ModelSim/Questa runner. `wave.do` — GUI run with the
-  signals pre-added for a waveform capture.
-
-Last run: **5,956,732** bit-exact hash comparisons and 20 end-to-end search
-checks, **0 errors**. Pure Verilog-2001, so it runs unchanged in
-ModelSim-Intel FPGA Starter, Questa, or Icarus.
-
-```
-# ModelSim / Questa (from the folder with fnv1a_core.v + fnv1a_tb.v)
-vsim -c -do run.do
-```
+Scope: this is a functional cross-check of the end result. It does not include a per-candidate HDL simulation (e.g. a self-checking testbench comparing the RTL's internal hash against a golden model every cycle) — that would be the next step to fully characterise the datapath.
 
 ## A note on performance claims
 
@@ -178,8 +159,6 @@ CONTROL bit0, then poll STATUS for `done`/`found` and read RESULT.
 ## Next steps
 
 - [ ] Register the hash datapath into pipeline stages to lift Fmax.
-- [ ] Replicate the core into N lanes over disjoint index ranges, with
-      priority-encoded result aggregation, for near-linear throughput scaling.
-- [ ] Add a documented CPU-vs-FPGA benchmark with a pinned baseline (HPS
-      Cortex-A9, compiler flags, wall-clock vs cycle-count) if a speedup figure
-      is ever needed.
+- [ ] Replicate the core into N lanes over index ranges, with
+      priority-encoded result aggregation, for throughput scaling.
+
