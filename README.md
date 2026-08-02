@@ -101,24 +101,6 @@ cat /sys/class/fpga_bridge/br0/state          # bridge state (expected: disabled
 **3. Apply the firmware overlay** (`fw.dts`), which tells the kernel to program
 `fpga_program.rbf` (from `/lib/firmware`) onto the fabric:
 
-```dts
-/dts-v1/;
-/plugin/;
-/ {
-    fragment@0 {
-        target-path = "/soc/base_fpga_region";
-        #address-cells = <1>;
-        #size-cells = <1>;
-        __overlay__ {
-            #address-cells = <1>;
-            #size-cells = <1>;
-            firmware-name = "fpga_program.rbf";
-            fpga-bridges = <&fpga_bridge0>;
-        };
-    };
-};
-```
-
 ```sh
 mkdir /sys/kernel/config/device-tree/overlays/fw
 dtc -@ -O dtb -o /root/fw.dtbo /root/fw.dts
